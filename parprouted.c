@@ -22,7 +22,7 @@
 
 char *progname;
 int debug=0; int sdebug = 0; /* "-dd" outputs to syslog as well */
-int verbose=0;
+int verbose=0; /* looks like an internal debug flag (to be altered manually here if needed) */
 int option_arpperm=0;
 static int perform_shutdown=0;
 
@@ -419,7 +419,8 @@ int main (int argc, char **argv)
     int i, help=0;
     
     progname = (char *) basename(argv[0]);
-    
+
+#if 0    
     for (i = 1; i < argc; i++) {
 	if (!strcmp(argv[i],"-d")) { 
 	    debug=1;
@@ -443,9 +444,9 @@ int main (int argc, char **argv)
 	    //help=0;
 	}
     }
-
-    /* setting additional parameters */
-    set_config(argc, argv);
+#endif
+    /* parses argv[], sets external variables like debug and ifaces[] */
+    help = set_config(argc, argv);
     
     if (help || last_iface_idx <= -1) {
 	    printf("parprouted: proxy ARP routing daemon, version %s.\n", VERSION);
@@ -454,7 +455,7 @@ int main (int argc, char **argv)
 	    printf("Options: \n"
                    "  -D            : send debug output to syslog \n"
                    "  --atet   <n>  : set arp table entry timeout (%d sec) \n"
-                   "  --stime  <n>  : arp refresh interval (%d ms) \n"
+                   "  --stime  <n>  : arp refresh interval (%d microseconds) \n"
                    "  --rtime  <n>  : arp refresh timeout (%d sec) \n"
                    "  --rqsize <n>  : max arp refresh queue size (%d) \n"
                    , ARP_TABLE_ENTRY_TIMEOUT
