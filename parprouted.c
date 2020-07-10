@@ -106,7 +106,8 @@ int route_remove(ARPTAB_ENTRY* cur_entry)
     int success = 1;
     
     if (snprintf(routecmd_str, ROUTE_CMD_LEN-1, 
-	    "/bin/ip route del %s/32 metric 50 dev %s scope link",
+	    // "/bin/ip route del %s/32 metric 50 dev %s scope link",
+	    BIN_IP " route del %s/32 metric 50 dev %s scope link",
 	    inet_ntoa(cur_entry->ipaddr_ia), cur_entry->ifname) > ROUTE_CMD_LEN-1) 
     {
 	syslog(LOG_INFO, "ip route command too large to fit in buffer!");
@@ -136,7 +137,8 @@ int route_add(ARPTAB_ENTRY* cur_entry)
     int success = 1;
 
     if (snprintf(routecmd_str, ROUTE_CMD_LEN-1, 
-	    "/bin/ip route add %s/32 metric 50 dev %s scope link",
+	    // "/bin/ip route add %s/32 metric 50 dev %s scope link",
+	    BIN_IP " route add %s/32 metric 50 dev %s scope link",
 	    inet_ntoa(cur_entry->ipaddr_ia), cur_entry->ifname) > ROUTE_CMD_LEN-1) 
     {
 	syslog(LOG_INFO, "ip route command too large to fit in buffer!");

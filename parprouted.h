@@ -17,6 +17,9 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#ifndef BIN_IP /* let it be configurable through the Makefile */
+    #define BIN_IP   "/sbin/ip"
+#endif
 #define PROC_ARP "/proc/net/arp"
 #define ARP_LINE_LEN 255
 #define ARP_TABLE_ENTRY_LEN 20
@@ -28,7 +31,8 @@
 
 #define MAX_RQ_SIZE 50	/* maximum size of request queue */
 
-#define VERSION "0.7"
+// #define VERSION "0.7"
+#define VERSION "0.7.1" /* config */
 
 #include <errno.h>
 #include <fcntl.h>
