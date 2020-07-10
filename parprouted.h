@@ -32,7 +32,8 @@
 #define MAX_RQ_SIZE 50	/* maximum size of request queue */
 
 // #define VERSION "0.7"
-#define VERSION "0.7.1" /* config */
+// #define VERSION "0.7.1" /* config */
+#define VERSION "0.7.2" /* syslog/debug */
 
 #include <errno.h>
 #include <fcntl.h>
