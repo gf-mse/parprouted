@@ -23,17 +23,20 @@
 #define PROC_ARP "/proc/net/arp"
 #define ARP_LINE_LEN 255
 #define ARP_TABLE_ENTRY_LEN 20
-#define ARP_TABLE_ENTRY_TIMEOUT 60 /* seconds */
+// #define ARP_TABLE_ENTRY_TIMEOUT 60 /* seconds */
 #define ROUTE_CMD_LEN 255
-#define SLEEPTIME 1000000 /* ms */
-#define REFRESHTIME 50 /* seconds */
+// #define SLEEPTIME 1000000 /* ms */
+// #define REFRESHTIME 50 /* seconds */
 #define MAX_IFACES 10
 
-#define MAX_RQ_SIZE 50	/* maximum size of request queue */
+#include "config.h"
+
+// #define MAX_RQ_SIZE 50	/* maximum size of request queue */
 
 // #define VERSION "0.7"
 // #define VERSION "0.7.1" /* config */
-#define VERSION "0.7.2" /* syslog/debug */
+// #define VERSION "0.7.2" /* syslog/debug */
+#define VERSION "0.7.3" /* more command line options */
 
 #include <errno.h>
 #include <fcntl.h>

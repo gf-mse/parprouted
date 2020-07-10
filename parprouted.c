@@ -333,9 +333,10 @@ void parseproc()
                a different interface */
             if (entry->want_route)
             {
-                if (remove_other_routes(entry->ipaddr_ia, entry->ifname) > 0)
+                if (remove_other_routes(entry->ipaddr_ia, entry->ifname) > 0) {
                     if (debug)  printf("Found ARP entry %s(%s), removed entries via other interfaces\n", inet_ntoa(entry->ipaddr_ia), entry->ifname);
                     if (sdebug) syslog(LOG_DEBUG, "Found ARP entry %s(%s), removed entries via other interfaces", inet_ntoa(entry->ipaddr_ia), entry->ifname);
+                }
             }
 
 	    time(&entry->tstamp);
@@ -422,8 +423,11 @@ int main (int argc, char **argv)
     for (i = 1; i < argc; i++) {
 	if (!strcmp(argv[i],"-d")) { 
 	    debug=1;
-            /* syslog debug ; nb: "-dd" involves "-d" */
-            if (!strcmp(argv[i],"-dd")) { sdebug=1; }
+            // /* syslog debug ; nb: "-dd" involves "-d" */
+            // if (!strcmp(argv[i],"-dd")) { sdebug=1; }
+	}
+	else if (!strcmp(argv[i],"-D")) { 
+	    sdebug=1;
 	}
 	else if (!strcmp(argv[i],"-p")) { 
 	    option_arpperm=1;
@@ -440,10 +444,24 @@ int main (int argc, char **argv)
 	}
     }
 
+    /* setting additional parameters */
+    set_config(argc, argv);
+    
     if (help || last_iface_idx <= -1) {
 	    printf("parprouted: proxy ARP routing daemon, version %s.\n", VERSION);
     	    printf("(C) 2007 Vladimir Ivaschenko <vi@maks.net>, GPL2 license.\n");
 	    printf("Usage: parprouted [-d] [-p] interface [interface]\n");
+	    printf("Options: \n"
+                   "  -D            : send debug output to syslog \n"
+                   "  --atet   <n>  : set arp table entry timeout (%d sec) \n"
+                   "  --stime  <n>  : arp refresh interval (%d ms) \n"
+                   "  --rtime  <n>  : arp refresh timeout (%d sec) \n"
+                   "  --rqsize <n>  : max arp refresh queue size (%d) \n"
+                   , ARP_TABLE_ENTRY_TIMEOUT
+                   , SLEEPTIME
+                   , REFRESHTIME
+                   , MAX_RQ_SIZE
+            );
 	    exit(1);
     }
 
