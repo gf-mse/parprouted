@@ -2,7 +2,7 @@ EXTRA_CFLAGS =
 
 #CC = gcc
 
-CFLAGS = -g -O2 -Wall $(EXTRA_CFLAGS)
+CFLAGS = -g -O2 -Wall $(EXTRA_CFLAGS) -D_HAVE_ETHER_H
 # For ARM:
 # CFLAGS =  -Wall $(EXTRA_CFLAGS)
 LDFLAGS = 

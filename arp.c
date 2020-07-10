@@ -27,7 +27,7 @@
 
 #include "parprouted.h"
 
-
+#ifndef _HAVE_ETHER_H
 // ===================
 /*
  * Ethernet Address Resolution Protocol.
@@ -49,6 +49,8 @@ struct	ether_arp {
 #define	arp_pln	ea_hdr.ar_pln
 #define	arp_op	ea_hdr.ar_op
 // ===============
+#endif
+
 
 typedef struct _ether_arp_frame { 
   struct ether_header ether_hdr;
